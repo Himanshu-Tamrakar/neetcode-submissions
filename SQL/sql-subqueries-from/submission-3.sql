@@ -1,23 +1,41 @@
-CREATE TABLE sports (
-    id INTEGER PRIMARY KEY,
+CREATE TABLE employees (
+    id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     name TEXT,
-    total_viewers INTEGER
+    salary INTEGER,
+    department TEXT
 );
 
-INSERT INTO sports (id, name, total_viewers) 
-  VALUES (1, 'Football', 1000000),
-          (2, 'Basketball', 2000000),
-          (3, 'Tennis', 500000),
-          (4, 'Baseball', 750000),
-          (5, 'Golf', 250000);
+INSERT INTO employees (name, salary, department) VALUES
+  ('Alice', 50000, 'marketing'),
+  ('Bob', 60000, 'marketing'),
+  ('Charlie', 55000, 'marketing'),
+  ('David', 65000, 'marketing'),
+  ('Eve', 70000, 'finance'),
+  ('Frank', 52000, 'finance'),
+  ('Grace', 58000, 'finance'),
+  ('Hank', 62000, 'finance');
 -- Do not modify above this line. --
 
 
 
-SELECT name, total_viewers 
-FROM sports
-WHERE total_viewers < (
-    SELECT AVG(total_viewers) FROM sports
-)
-ORDER BY total_viewers DESC;
+-- SELECT name, salary
+-- FROM employees e
+-- WHERE department = 'marketing' AND salary < (SELECT AVG(salary) FROM employees)
+-- ORDER BY salary;
+
+
+SELECT name, salary
+FROM employees e
+JOIN (
+    SELECT AVG(salary) AS avg_salary
+    FROM employees
+) AS avg
+ON e.salary < avg.avg_salary
+WHERE department = 'marketing'
+ORDER BY salary;
+
+
+
+
+
 
