@@ -1,24 +1,19 @@
-CREATE TABLE cities (
+CREATE TABLE comments (
     id INT PRIMARY KEY,
-    name TEXT,
-    country TEXT
+    author TEXT,
+    body TEXT
 );
 
-INSERT INTO cities (id, name, country) VALUES
-(1, 'Tokyo', 'Japan'),
-(2, 'London', 'England'),
-(3, 'Paris', 'France'),
-(4, 'New York', 'USA'),
-(5, 'New Delhi', 'India'),
-(6, 'Shanghai', 'China'),
-(7, 'Sao Paulo', 'Brazil'),
-(8, 'Mexico City', 'Mexico'),
-(9, 'Cairo', 'Egypt'),
-(10, 'Mumbai', 'India'),
-(11, 'Beijing', 'China'),
-(12, 'Los Angeles', 'USA');
+INSERT INTO comments (id, author, body) VALUES
+(1, 'NeetCode', 'This problem should be marked as easy.. haha'),
+(2, 'Lee', 'This problem is too hard for an easy tag'),
+(3, NULL, 'This is a test comment'),
+(4, 'John', 'This is another test comment'),
+(5, NULL, 'This is a test comment with NULL author');
 -- Do not modify above this line. --
 
 
 
-SELECT DISTINCT country from cities;
+SELECT *
+FROM comments
+WHERE author IS NOT NULL;
